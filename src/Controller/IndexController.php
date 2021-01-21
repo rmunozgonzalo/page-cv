@@ -17,4 +17,14 @@ class IndexController extends AbstractController
 
       return new Response($contents);
     }
+    /**
+     * @Route("/gallery")
+     */
+   public function gallery(): Response
+   {
+     $contents = $this->renderView('gallery.html.twig', [
+     ]);
+
+     return new Response($contents);
+   }
 }
