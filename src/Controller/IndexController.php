@@ -22,7 +22,7 @@ class IndexController extends AbstractController
      */
    public function gallery(): Response
    {
-     $contents = $this->renderView('gallery.html.twig', [
+     $contents = $this->renderView('gallery/gallery.html.twig', [
      ]);
 
      return new Response($contents);
