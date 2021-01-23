@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 class IndexController extends AbstractController
 {
      /**
-      * @Route("/", name="index")
+      * @Route("/index", name="index")
       */
     public function coming(): Response
     {
@@ -18,7 +18,7 @@ class IndexController extends AbstractController
       return new Response($contents);
     }
     /**
-     * @Route("/gallery", name="galeria")
+     * @Route("/", name="galeria")
      */
    public function gallery(): Response
    {
