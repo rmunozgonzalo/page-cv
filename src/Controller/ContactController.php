@@ -20,22 +20,23 @@ class ContactController extends AbstractController
       $name = $request->get('name');
       $email = $request->get('email');
       $message = $request->get('message');
+
       $from = $this->getParameter('app.email');
       $owner = $this->getParameter('app.email.owner');
-      $message = (new Email())
+      $emailContact = (new Email())
                      ->from($from)
                      ->to($email)
                      ->subject('Contacto')
                      ->html($this->renderView('Emails/emailContacto.html.twig',array('name' => $name)),'text/html');
 
-     $messageOwner = (new Email())
+     $emailOwner = (new Email())
                     ->from($from)
                     ->to($owner)
                     ->subject('Contacto')
                     ->html($this->renderView('Emails/emailPropietario.html.twig',array('name' => $name,'message'=>$message,'email'=>$email)),'text/html');
 
-      $result = $mailer->send($message);
-      $result2 = $mailer->send($messageOwner);
+      $result = $mailer->send($emailContact);
+      $result2 = $mailer->send($emailOwner);
 
       $contents = $this->renderView('gallery/gallery.html.twig', [
       ]);
