@@ -9,6 +9,7 @@ parameters:
     app.client:  '%env(CLIENTE)%'
     app.clientSecret:  '%env(CLIENTESECRET)%'
     app.refreshToken:  '%env(REFRESHTK)%'
+    app.urlRedirect: '%env(URLREDIRECT)%'
 services:
     # default configuration for services in *this* file
     _defaults:

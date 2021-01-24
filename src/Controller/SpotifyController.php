@@ -26,11 +26,12 @@ class SpotifyController extends AbstractController
 
      $cliente =  $this->getParameter('app.client');
      $clienteSecret = $this->getParameter('app.clientSecret');
+     $urlRedirect = $this->getParameter('app.urlRedirect');
 
      $session = new SessionSpotify(
               $cliente,
               $clienteSecret,
-             'http://localhost/page-cv/public/init'
+             $urlRedirect
 
        );
        $code = 0;
@@ -125,18 +126,18 @@ class SpotifyController extends AbstractController
       return new JsonResponse($data);
     }
 
-    $cliente =  $this->getParameter('app.client');
-    $clienteSecret = $this->getParameter('app.clientSecret');
-
-
     $entityManager = $this->getDoctrine()->getManager();
     $spotifyEntity = $entityManager->getRepository(Spotify::class)->findOneBy(array(), array('id' => 'DESC'));
     $refreshTk = $spotifyEntity->getRefreshToken();
 
+    $cliente =  $this->getParameter('app.client');
+    $clienteSecret = $this->getParameter('app.clientSecret');
+    $urlRedirect = $this->getParameter('app.urlRedirect');
+
     $session = new SessionSpotify(
              $cliente,
              $clienteSecret,
-            'http://www.gmunoz.cl/init'
+            $urlRedirect
 
       );
 
