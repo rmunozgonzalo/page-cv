@@ -17,6 +17,10 @@
         <div class="logo">
             <a href="#">GMUNOZ<em>R</em></a>
         </div>
+        <div class="logo">
+            <img src="https://i.scdn.co/image/ab67616d00004851a46df9e0944a0e706b8a6649" alt=""></a>
+              <a href="#" style="    font-size: 15px;">asadsads</a>
+        </div>
         <div class="menu-icon">
         <span></span>
       </div>
@@ -107,10 +111,7 @@
     <div class="popup-icon">
       <button id="modBtn" class="modal-btn"><img src="{{ asset('img/contact-icon.png') }}" alt=""></button>
     </div>
-    <div class="popup-icon"  style="right: 150px;width: 350px;background-color: #000000a3;opacity:0.6;">
-      <a href="" id="externalUrl"  target=”_blank” style="font-size: 15px;color:white;float:left;"><p id="textSpotify" style="color:white;"></p></a>
-      <img  id="imgSpotify" style="height: 55px;float:right;" src="" alt=""></img>
-    </div>
+
     <!-- Modal -->
     <div id="modal" class="modal">
       <!-- Modal Content -->
@@ -199,37 +200,6 @@ $(document).ready(function(){
           $("#mensajeRespuesta").html("Gracias, te contactare lo antes posible :) ");
       }});
   });
-  getSpotify();
-  setInterval(getSpotify, 5000);
-
-  function getSpotify(){
-
-    $.ajax({
-        url:"{{path('currentTrack')}}",
-        data: {
-        },
-        success: function(result){
-          items = result.track.items;
-          var urlImg = null;
-          var name = null;
-          var externalUrl = null;
-          items.forEach(function(entry) {
-              images = entry.track.album.images;
-              images.forEach(function(img){
-                urlImg = img.url;
-              });
-              name = entry.track.name;
-              externalUrl = entry.track.external_urls.spotify;
-
-
-          });
-          $("#imgSpotify").attr("src",urlImg);
-          $("#textSpotify").html(name);
-          $("#externalUrl").attr("href",externalUrl);
-
-      }});
-
-  }
 });
 
 </script>

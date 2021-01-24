@@ -17,6 +17,9 @@
     "egulias/email-validator": {
         "version": "2.1.25"
     },
+    "jwilsson/spotify-web-api-php": {
+        "version": "4.2.0"
+    },
     "monolog/monolog": {
         "version": "2.2.0"
     },
