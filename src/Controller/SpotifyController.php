@@ -10,6 +10,7 @@ use App\Controller\Session as SessionSpotify;
 use App\Controller\SpotifyWebAPI;
 use App\Entity\Spotify;
 use Symfony\Component\Console\Command\LockableTrait;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class SpotifyController extends AbstractController
 {
@@ -22,7 +23,9 @@ class SpotifyController extends AbstractController
      */
    public function initAction(Request $request)
    {
-     session_start();
+
+     $sessionHttp = new Session();
+     $sessionHttp->start();
 
      $cliente =  $this->getParameter('app.client');
      $clienteSecret = $this->getParameter('app.clientSecret');
@@ -40,7 +43,8 @@ class SpotifyController extends AbstractController
        $verifier = $session->generateCodeVerifier(); // Store this value somewhere, a session for example
        $challenge = $session->generateCodeChallenge($verifier);
        $state = $session->generateState();
-       $_SESSION["verifier"] = $verifier;
+
+       $sessionHttp->set('verifier', $verifier);
 
        $options = [
            'code_challenge' => $challenge,
@@ -60,7 +64,7 @@ class SpotifyController extends AbstractController
        else{
 
            // Request a access token using the code from Spotify and the previously created code verifier
-           $session->requestAccessToken($code,$_SESSION["verifier"]);
+           $session->requestAccessToken($code,$sessionHttp->get('verifier'));
            //$session->requestAccessToken($code,$verifier);
 
            $accessToken = $session->getAccessToken();
