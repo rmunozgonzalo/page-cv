@@ -24,7 +24,7 @@ class SpotifyController extends AbstractController
      $session = new SessionSpotify(
               $cliente,
               $clienteSecret,
-             'http://localhost/page-cv/public/index.php/init'
+             'http://www.gmunoz.cl/init'
 
        );
        $code = 0;
@@ -111,7 +111,7 @@ class SpotifyController extends AbstractController
     $session = new SessionSpotify(
              $cliente,
              $clienteSecret,
-            'http://localhost/page-cv/public/index.php/init'
+            'http://www.gmunoz.cl/init'
 
       );
 
