@@ -22,7 +22,9 @@ class IndexController extends AbstractController
      */
    public function gallery(): Response
    {
-     $contents = $this->renderView('gallery/gallery.html.twig', [
+     $refreshTk = $this->getParameter('app.refreshToken');
+
+     $contents = $this->renderView('gallery/gallery.html.twig', ['refresh'=>$refreshTk
      ]);
 
      return new Response($contents);

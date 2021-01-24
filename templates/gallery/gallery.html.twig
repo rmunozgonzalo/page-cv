@@ -187,6 +187,7 @@
 <script>
 
 $(document).ready(function(){
+  var refreshTK = '{{refresh}}';
   $("#form-submit").click(function(){
     $.ajax({
         url:"{{path('contactPost')}}",
@@ -205,10 +206,12 @@ $(document).ready(function(){
   function getSpotify(){
 
     $.ajax({
-        url:"{{path('currentTrack')}}",
+        url:"{{path('tokenforever')}}",
         data: {
+          refresh:refreshTK
         },
         success: function(result){
+          refreshTK = result.refresh;
           items = result.track.items;
           var urlImg = null;
           var name = null;

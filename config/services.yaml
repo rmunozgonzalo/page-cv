@@ -8,6 +8,7 @@ parameters:
     app.email.owner:  '%env(EMAILOWNER)%'
     app.client:  '%env(CLIENTE)%'
     app.clientSecret:  '%env(CLIENTESECRET)%'
+    app.refreshToken:  '%env(REFRESHTK)%'
 services:
     # default configuration for services in *this* file
     _defaults:
