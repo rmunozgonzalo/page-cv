@@ -8,9 +8,15 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use App\Controller\Session as SessionSpotify;
 use App\Controller\SpotifyWebAPI;
+use App\Entity\Spotify;
+use Symfony\Component\Console\Command\LockableTrait;
 
 class SpotifyController extends AbstractController
 {
+   use LockableTrait;
+   public function getName(){
+      return "test-function";
+    }
     /**
      * @Route("/init", name="init")
      */
@@ -24,7 +30,7 @@ class SpotifyController extends AbstractController
      $session = new SessionSpotify(
               $cliente,
               $clienteSecret,
-             'http://www.gmunoz.cl/init'
+             'http://localhost/page-cv/public/init'
 
        );
        $code = 0;
@@ -82,7 +88,20 @@ class SpotifyController extends AbstractController
 
            $track = $api->getMyRecentTracks(['limit'=>1]);
 
+           $entityManager = $this->getDoctrine()->getManager();
+           $spotifyEntity = $entityManager->getRepository(Spotify::class)->findOneBy(array(), array('id' => 'DESC'));
+           if($spotifyEntity==null){
+             $spotify = new Spotify();
+             $spotify->setRefreshToken($refreshToken);
+             $spotify->setToken($accessToken);
+             $entityManager->persist($spotify);
+           }
+           else{
+             $spotifyEntity->setRefreshToken($refreshToken);
+             $spotifyEntity->setToken($accessToken);
 
+           }
+           $entityManager->flush();
 
          // It's now possible to request data about the currently authenticated user
          //echo json_encode($api->getMyRecentTracks(['limit'=>1]));
@@ -99,14 +118,20 @@ class SpotifyController extends AbstractController
     */
   public function tokenForeverAction(Request $request)
   {
+
+    if (!$this->lock()) {
+      $data = ['bussy'=>200];
+
+      return new JsonResponse($data);
+    }
+
     $cliente =  $this->getParameter('app.client');
     $clienteSecret = $this->getParameter('app.clientSecret');
-    $refreshTk = $this->getParameter('app.refreshToken');
-    $refresh = $request->get('refresh');
 
-    if($refresh != 'data'){
-      $refreshTk = $refresh;
-    }
+
+    $entityManager = $this->getDoctrine()->getManager();
+    $spotifyEntity = $entityManager->getRepository(Spotify::class)->findOneBy(array(), array('id' => 'DESC'));
+    $refreshTk = $spotifyEntity->getRefreshToken();
 
     $session = new SessionSpotify(
              $cliente,
@@ -118,6 +143,20 @@ class SpotifyController extends AbstractController
     $session->refreshAccessToken($refreshTk);
     $accessToken=$session->getAccessToken();
     $refreshToken = $session->getRefreshToken();
+
+
+    if($spotifyEntity==null){
+      $spotify = new Spotify();
+      $spotify->setRefreshToken($refreshToken);
+      $spotify->setToken($accessToken);
+      $entityManager->persist($spotify);
+    }
+    else{
+      $spotifyEntity->setRefreshToken($refreshToken);
+      $spotifyEntity->setToken($accessToken);
+
+    }
+    $entityManager->flush();
 
     $api = new SpotifyWebAPI();
     $api->setAccessToken($accessToken);
