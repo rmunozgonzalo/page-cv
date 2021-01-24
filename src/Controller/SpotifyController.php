@@ -27,6 +27,7 @@ class SpotifyController extends AbstractController
      $cliente =  $this->getParameter('app.client');
      $clienteSecret = $this->getParameter('app.clientSecret');
      $urlRedirect = $this->getParameter('app.urlRedirect');
+     $code = $request->get('code');
 
      $session = new SessionSpotify(
               $cliente,
@@ -34,12 +35,8 @@ class SpotifyController extends AbstractController
              $urlRedirect
 
        );
-       $code = 0;
-       if(isset($_GET['code'])){
-         $code = $_GET['code'];
-       }
        //if(0){
-       if(!isset($_GET['code'])){
+       if($code == null ){
        $verifier = $session->generateCodeVerifier(); // Store this value somewhere, a session for example
        $challenge = $session->generateCodeChallenge($verifier);
        $state = $session->generateState();
@@ -63,7 +60,7 @@ class SpotifyController extends AbstractController
        else{
 
            // Request a access token using the code from Spotify and the previously created code verifier
-           $session->requestAccessToken($_GET['code'],$_SESSION["verifier"]);
+           $session->requestAccessToken($code,$_SESSION["verifier"]);
            //$session->requestAccessToken($code,$verifier);
 
            $accessToken = $session->getAccessToken();
