@@ -1,0 +1,8 @@
+easy_admin:
+  design:
+    menu:
+      - label: 'Home'
+        icon: 'home'
+        permission: [ROLE_ADMIN]
+        children:
+          - { label: 'Usuario', entity: 'Usuario', icon: 'user' }

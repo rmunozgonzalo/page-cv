@@ -11,6 +11,7 @@
         "doctrine/doctrine-bundle": "^2.2",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.8",
+        "easycorp/easyadmin-bundle": "2.*",
         "jwilsson/spotify-web-api-php": "^4.2",
         "sensio/framework-extra-bundle": "^5.6",
         "swiftmailer/swiftmailer": "^6.0",
@@ -26,6 +27,7 @@
         "symfony/proxy-manager-bridge": "5.2.*",
         "symfony/security-bundle": "5.2.*",
         "symfony/translation": "5.2.*",
+        "symfony/twig-bridge": "5.2.*",
         "symfony/twig-bundle": "5.2.*",
         "symfony/yaml": "5.2.*"
     },

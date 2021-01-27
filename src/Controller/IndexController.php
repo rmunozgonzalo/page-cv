@@ -32,7 +32,7 @@ class IndexController extends AbstractController
    }
 
    /**
-    * @Route("/admin", name="admin")
+    * @Route("/admintest", name="admintest")
     * @IsGranted("ROLE_ADMIN")
     */
   public function adminAction(): Response
