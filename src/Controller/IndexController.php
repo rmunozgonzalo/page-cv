@@ -4,6 +4,7 @@ namespace App\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class IndexController extends AbstractController
 {
@@ -29,4 +30,16 @@ class IndexController extends AbstractController
 
      return new Response($contents);
    }
+
+   /**
+    * @Route("/admin", name="admin")
+    * @IsGranted("ROLE_ADMIN")
+    */
+  public function adminAction(): Response
+  {
+    $contents = $this->renderView('coming.html.twig', [
+    ]);
+
+    return new Response($contents);
+  }
 }

@@ -10,6 +10,7 @@ use App\Controller\Session as SessionSpotify;
 use App\Controller\SpotifyWebAPI;
 use App\Entity\Spotify;
 use Symfony\Component\Console\Command\LockableTrait;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class SpotifyController extends AbstractController
 {
@@ -19,6 +20,7 @@ class SpotifyController extends AbstractController
     }
     /**
      * @Route("/init", name="init")
+     * @IsGranted("ROLE_ADMIN")
      */
    public function initAction(Request $request)
    {
