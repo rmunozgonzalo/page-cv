@@ -6,3 +6,4 @@ easy_admin:
         permission: [ROLE_ADMIN]
         children:
           - { label: 'Usuario', entity: 'Usuario', icon: 'user' }
+          - { label: 'Gallery', entity: 'Gallery', icon: 'picture-o' }

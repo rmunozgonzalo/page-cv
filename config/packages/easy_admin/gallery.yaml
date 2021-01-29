@@ -1,0 +1,16 @@
+easy_admin:
+  entities:
+    Gallery:
+      class: App\Entity\Gallery
+      show:
+        role: ROLE_ADMIN
+      search:
+        role: ROLE_ADMIN
+      delete:
+        role: ROLE_ADMIN
+      list:
+        role: ROLE_ADMIN
+      new:
+        role: ROLE_ADMIN
+      edit:
+        role: ROLE_ADMIN
