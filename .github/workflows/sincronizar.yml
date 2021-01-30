@@ -16,4 +16,4 @@ jobs:
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: ${{ secrets.PORT }}
-        script: sh comandos.sh
+        script: sudo sh comandos.sh
