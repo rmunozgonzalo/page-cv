@@ -2,13 +2,25 @@ easy_admin:
   entities:
     Gallery:
       class: App\Entity\Gallery
+      form:
+        fields:
+          - {property: titulo, label: "Titulo"}
+          - {property: descripcion, label: "Descripción"}
+          - {property: imageFile, type: 'vich_image', type_options: { required: false }}
+          - {property: imageFile_mini, label: "Imagen Galeria Mini", type: 'vich_image', type_options: { required: false }}
+      list:
+        role: ROLE_ADMIN
+        fields:
+          - {property: titulo, label: "Titulo"}
+          - {property: descripcion, label: "Descripción"}
+          - {property: image, label: "Imagen Galeria", type: 'image', base_path: '%app.base.images%'}
+          - {property: image_mini, label: "Imagen Galeria Mini", type: 'image', base_path: '%app.base.images%'}
+
       show:
         role: ROLE_ADMIN
       search:
         role: ROLE_ADMIN
       delete:
-        role: ROLE_ADMIN
-      list:
         role: ROLE_ADMIN
       new:
         role: ROLE_ADMIN
