@@ -42,7 +42,7 @@ class Gallery
       $this->titulo = $titulo;
     }
 
-    public function getRefreshToken(){
+    public function getDescripcion(){
       return $this->descripcion;
     }
 
