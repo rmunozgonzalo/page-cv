@@ -11,7 +11,7 @@ parameters:
     app.refreshToken:  '%env(REFRESHTK)%'
     app.urlRedirect: '%env(URLREDIRECT)%'
     app.path.images: /upload/images
-    app.base.images: /page-cv/public/upload/images/
+    app.base.images: '%env(URLIMAGEBASE)%'
 services:
     # default configuration for services in *this* file
     _defaults:
