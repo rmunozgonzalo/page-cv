@@ -43,51 +43,26 @@
 
     <div class="full-screen-portfolio" id="portfolio">
         <div class="container-fluid">
+          {% for image in gallery %}
+
             <div class="col-md-4 col-sm-6">
                 <div class="portfolio-item">
-                    <a href="{{ asset('img/camino-big.jpg') }}" data-lightbox="image-1"><div class="thumb">
+                    <a href="{{base_path}}{{image.image}}" alt="{{image.image}}" data-lightbox="image-1">
+                      <div class="thumb">
                         <div class="hover-effect">
                             <div class="hover-content">
-                                <h1>Alto Pangue  <em></em></h1>
-                                <p>Camino hacia alto pangue</p>
+                                <h1>{{image.titulo}}<em></em></h1>
+                                <p>{{image.descripcion}}</p>
                             </div>
                         </div>
                         <div class="image">
-                            <img src="{{ asset('img/camino.jpg') }}">
+                            <img src="{{base_path}}{{image.getImageMini}}" alt="{{image.getImageMini}}">
                         </div>
-                    </div></a>
+                    </div>
+                  </a>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="portfolio-item">
-                    <a href="{{ asset('img/reserva1-big.jpg') }}" data-lightbox="image-1"><div class="thumb">
-                        <div class="hover-effect">
-                            <div class="hover-content">
-                                <h1>Reserva Altos de Lircay  <em></em></h1>
-                                <p>En la montaña</p>
-                            </div>
-                        </div>
-                        <div class="image">
-                            <img src="{{ asset('img/reserva1.jpg') }}">
-                        </div>
-                    </div></a>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="portfolio-item">
-                    <a href="{{ asset('img/patio-big.jpg') }}" data-lightbox="image-1"><div class="thumb">
-                        <div class="hover-effect">
-                            <div class="hover-content">
-                                <h1>Casa <em></em></h1>
-                                <p>Atardecer desde casa</p>
-                            </div>
-                        </div>
-                        <div class="image">
-                            <img src="{{ asset('img/patio.jpg') }}">
-                        </div>
-                    </div></a>
-                </div>
-            </div>
+           {% endfor %}
         </div>
     </div>
 
