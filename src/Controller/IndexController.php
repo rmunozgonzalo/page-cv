@@ -6,6 +6,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use App\Entity\Gallery;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 class IndexController extends AbstractController
 {
@@ -36,6 +42,30 @@ class IndexController extends AbstractController
 
      return new Response($contents);
    }
+
+   /**
+    * @Route("/galeria/json", name="galeriajson")
+    */
+  public function galleryJsonAction()
+  {
+    $base = $this->getParameter('app.base.images');
+    $encoders = [new JsonEncoder()];
+    $normalizers = [new ObjectNormalizer()];
+
+    $serializer = new Serializer($normalizers, $encoders);
+
+    $gallery = $this->getDoctrine()
+      ->getRepository(Gallery::class)
+      ->findAll();
+
+    foreach ($gallery as $img => $value) {
+      $gallery[$img]->setImageMini($base.''.$gallery[$img]->getImageMini());
+    }
+
+    $galleryJson = $serializer->serialize($gallery,'json');
+
+    return new Response($galleryJson);
+  }
 
    /**
     * @Route("/admintest", name="admintest")
