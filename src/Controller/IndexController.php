@@ -26,7 +26,7 @@ class IndexController extends AbstractController
       return new Response($contents);
     }
     /**
-     * @Route("/", name="galeria")
+     * @Route("/galeria", name="galeria")
      */
    public function gallery(): Response
    {
@@ -44,7 +44,7 @@ class IndexController extends AbstractController
    }
 
    /**
-    * @Route("/vue", name="galeriavue")
+    * @Route("/", name="galeriavue")
     */
   public function galleryVue(): Response
   {
