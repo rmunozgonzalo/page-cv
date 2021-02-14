@@ -44,6 +44,20 @@ class IndexController extends AbstractController
    }
 
    /**
+    * @Route("/vue", name="galeriavue")
+    */
+  public function galleryVue(): Response
+  {
+    $refreshTk = $this->getParameter('app.refreshToken');
+
+    $contents = $this->renderView('gallery/galleryVue.html.twig',
+    [
+      'refresh'=>$refreshTk,
+    ]);
+
+    return new Response($contents);
+  }
+   /**
     * @Route("/galeria/json", name="galeriajson")
     */
   public function galleryJsonAction()
@@ -60,6 +74,7 @@ class IndexController extends AbstractController
 
     foreach ($gallery as $img => $value) {
       $gallery[$img]->setImageMini($base.''.$gallery[$img]->getImageMini());
+      $gallery[$img]->setImage($base.''.$gallery[$img]->getImage());
     }
 
     $galleryJson = $serializer->serialize($gallery,'json');

@@ -1,0 +1,240 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+{{parent()}}
+<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet"/>
+<link href="{{ asset('css/bootstrap-theme.min.css') }}" rel="stylesheet"/>
+<link href="{{ asset('css/fontAwesome.css') }}" rel="stylesheet"/>
+<link href="{{ asset('css/light-box.css') }}" rel="stylesheet"/>
+<link href="{{ asset('css/templatemo-style.css') }}" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css?family=Kanit:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+{% endblock %}
+
+{% block body %}
+
+<nav>
+        <div class="logo">
+            <a href="#">GMUNOZ<em>R</em></a>
+        </div>
+        <div class="menu-icon">
+        <span></span>
+      </div>
+    </nav>
+
+    <div id="video-container">
+        <div class="video-overlay"></div>
+        <div class="video-content">
+            <div class="inner">
+              <h1>Bienvenido <em></em></h1>
+              <p></p>
+              <p></p>
+                <div class="scroll-icon">
+                    <a class="scrollTo" data-scrollTo="portfolio" href="#">
+                      <img src="{{ asset('img/scroll-icon.png') }}" alt=""></a>
+                </div>
+            </div>
+        </div>
+        <video autoplay="" loop="" muted>
+        	<source src="{{ asset('video/bebop2.mp4') }}" type="video/mp4" />
+        </video>
+    </div>
+
+
+    <div class="full-screen-portfolio" id="portfolio">
+        <div class="container-fluid">
+          <div v-for="variant in variants" :key="variant.id" class="col-md-4 col-sm-6">
+              <div class="portfolio-item">
+                  <a v-bind:href="variant.image" alt="variant.image" data-lightbox="image-1">
+                    <div class="thumb">
+                      <div class="hover-effect">
+                          <div class="hover-content">
+                              <h1>${variant.titulo}$<em></em></h1>
+                              <p>${variant.descripcion}$</p>
+                          </div>
+                      </div>
+                      <div class="image">
+                          <img v-bind:src="variant.imageMini" alt="variant.imageMini">
+                      </div>
+                  </div>
+                </a>
+              </div>
+          </div>
+        </div>
+    </div>
+
+
+    <footer>
+        <div class="container-fluid">
+            <div class="col-md-12">
+                <p>Copyright &copy; 2018 GMUNOZ
+
+    | Designed by TemplateMo</p>
+            </div>
+        </div>
+    </footer>
+
+
+      <!-- Modal button -->
+    <div class="popup-icon">
+      <button id="modBtn" class="modal-btn"><img src="{{ asset('img/contact-icon.png') }}" alt=""></button>
+    </div>
+    <div class="popup-icon" style="right: 150px;width: 350px;background-color: #000000a3;opacity:0.6;">
+          <img id="imgSpotify2" style="height: 55px;float:left;" src="https://developer.spotify.com/assets/branding-guidelines/icon2@2x.png" alt="">
+        <a href="" id="externalUrl" target="”_blank”" style="font-size: 15px;color:white;float:left;padding-left: 15px;">
+          <p id="textSpotify" style="color:white;">Mr. Scary</p>
+        </a>
+          <img id="imgSpotify" style="height: 55px;float:right;" src="" alt="">
+        </div>
+    <!-- Modal -->
+    <div id="modal" class="modal">
+      <!-- Modal Content -->
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h3 class="header-title">
+            Di hola a <em>GM</em>
+          </h3>
+          <div class="close-btn"><img src="{{ asset('img/close_contact.png') }}" alt=""></div>
+        </div>
+        <!-- Modal Body -->
+        <div class="modal-body">
+          <div class="col-md-6 col-md-offset-3">
+                <div class="row form-group">
+                    <div class="col-md-12">
+                      <fieldset>
+                        <input name="name" type="text" class="form-control" id="name" placeholder="Tu nombre..." required="">
+                      </fieldset>
+                    </div>
+                    <div class="col-md-12">
+                      <fieldset>
+                        <input name="email" type="email" class="form-control" id="email" placeholder="Tu email..." required="">
+                      </fieldset>
+                    </div>
+                    <div class="col-md-12">
+                      <fieldset>
+                        <textarea name="message" rows="6" class="form-control" id="message" placeholder="Tu mensaje..." required=""></textarea>
+                      </fieldset>
+                    </div>
+                    <div class="col-md-12">
+                      <fieldset>
+                        <button type="button" id="form-submit" class="btn">Enviar un mensaje ahora</button>
+                      </fieldset>
+                    </div>
+                    <div class="col-md-12">
+                      <h3 id="mensajeRespuesta"></h3>
+                    </div>
+                </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <section class="overlay-menu">
+      <div class="container">
+        <div class="row">
+          <div class="main-menu">
+              <ul>
+                  <li>
+                      <a href="{{ path('galeria') }}">Home</a>
+                  </li>
+              </ul>
+              <p>Thanks TemplateMo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('js/vue.global.prod.js') }}"></script>
+
+<script src="{{ asset('js/modernizr-2.8.3-respond-1.4.2.min.js') }}"></script>
+
+<script>window.jQuery || document.write('<script src="{{ asset('js/vendor/jquery-1.11.2.min.js') }}"><\/script>')</script>
+
+<script src="{{ asset('js/vendor/bootstrap.min.js') }}"></script>
+
+<script src="{{ asset('js/plugins.js') }}"></script>
+<script src="{{ asset('js/main.js') }}"></script>
+
+<!-- Import App
+<script src="{{ asset('js/galery.js') }}"></script>
+-->
+
+<!-- Mount App -->
+<script>
+const app = Vue.createApp({
+    data() {
+        return {
+            variants:{}
+        }
+    },
+    created(){
+        fetch("{{ path('galeriajson') }}").then(response => response.json())
+            .then((data) => this.variants = data);
+    },
+    delimiters: ["${", "}$"]
+})
+
+  const mountedApp = app.mount('#portfolio')
+</script>
+
+<script>
+
+$(document).ready(function(){
+  var refreshTK = '{{refresh}}';
+  $("#form-submit").click(function(){
+    $.ajax({
+        url:"{{path('contactPost')}}",
+        data: {
+          name: $('#name').val(),
+          email: $('#email').val(),
+          message: $('#message').val()
+        },
+        success: function(result){
+          $("#mensajeRespuesta").html("Gracias, te contactare lo antes posible :) ");
+      }});
+  });
+  getSpotify();
+  setInterval(getSpotify, 30000);
+
+  function getSpotify(){
+
+    $.ajax({
+        url:"{{path('tokenforever')}}",
+        data: {
+          refresh:refreshTK
+        },
+        success: function(result){
+          refreshTK = result.refresh;
+          items = result.track.items;
+          var urlImg = null;
+          var name = null;
+          var externalUrl = null;
+          items.forEach(function(entry) {
+              images = entry.track.album.images;
+              images.forEach(function(img){
+                urlImg = img.url;
+              });
+              name = entry.track.name;
+              externalUrl = entry.track.external_urls.spotify;
+
+
+          });
+          $("#imgSpotify").attr("src",urlImg);
+          $("#textSpotify").html(name);
+          $("#externalUrl").attr("href",externalUrl);
+
+      }});
+
+  }
+});
+
+</script>
+
+{% endblock %}
