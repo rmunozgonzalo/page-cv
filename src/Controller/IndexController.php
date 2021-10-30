@@ -33,7 +33,8 @@ class IndexController extends AbstractController
      $refreshTk = $this->getParameter('app.refreshToken');
      $gallery = $this->getDoctrine()
        ->getRepository(Gallery::class)
-       ->findAll();
+       ->findBy(['estado'=>1]);
+
      $contents = $this->renderView('gallery/gallery.html.twig',
      [
        'refresh'=>$refreshTk,
@@ -70,7 +71,7 @@ class IndexController extends AbstractController
 
     $gallery = $this->getDoctrine()
       ->getRepository(Gallery::class)
-      ->findAll();
+      ->findBy(['estado'=>1]);
 
     foreach ($gallery as $img => $value) {
       $gallery[$img]->setImageMini($base.''.$gallery[$img]->getImageMini());

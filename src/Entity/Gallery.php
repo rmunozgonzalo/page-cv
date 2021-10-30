@@ -59,8 +59,14 @@ class Gallery
      */
     private $updatedAt;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    private $estado;
+
     public function __construct()
     {
+        $this->estado = 0;
     }
 
     public function setImageFileMini(File $imageFile_mini = null)
@@ -146,6 +152,18 @@ class Gallery
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getEstado(): ?bool
+    {
+        return $this->estado;
+    }
+
+    public function setEstado(?bool $estado): self
+    {
+        $this->estado = $estado;
 
         return $this;
     }

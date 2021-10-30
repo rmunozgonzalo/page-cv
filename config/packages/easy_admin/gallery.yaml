@@ -6,6 +6,7 @@ easy_admin:
         fields:
           - {property: titulo, label: "Titulo"}
           - {property: descripcion, label: "Descripción"}
+          - {property: estado, label: "Estado"}
           - {property: imageFile, type: 'vich_image', type_options: { required: false }}
           - {property: imageFile_mini, label: "Imagen Galeria Mini", type: 'vich_image', type_options: { required: false }}
       list:
@@ -13,6 +14,7 @@ easy_admin:
         fields:
           - {property: titulo, label: "Titulo"}
           - {property: descripcion, label: "Descripción"}
+          - {property: estado, label: "Estado"}
           - {property: image, label: "Imagen Galeria", type: 'image', base_path: '%app.base.images%'}
           - {property: image_mini, label: "Imagen Galeria Mini", type: 'image', base_path: '%app.base.images%'}
 
