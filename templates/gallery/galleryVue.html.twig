@@ -8,7 +8,8 @@
 <link href="{{ asset('css/light-box.css') }}" rel="stylesheet"/>
 <link href="{{ asset('css/templatemo-style.css') }}" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css?family=Kanit:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-
+<script src="https://brianium.github.io/watermarkjs/scripts/watermark.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
 {% endblock %}
 
 {% block body %}
@@ -41,11 +42,11 @@
     </div>
 
     <div id="portfolio">
-      <div class="full-screen-portfolio" v-if="isLoading" >
+      <div class="full-screen-portfolio" v-if="isLoading">
           <div class="container-fluid portafolio-back" style="background: #333;">
             <div v-for="variant in variants" :key="variant.id" class="col-md-4 col-sm-6">
                 <div class="portfolio-item">
-                    <a v-bind:href="variant.image" alt="variant.image" data-lightbox="image-1">
+                    <a class="boxlg" alt="variant.image" ><!-- v-bind:href="variant.image" data-lightbox="image-1"-->
                       <div class="thumb">
                         <div class="hover-effect">
                             <div class="hover-content">
@@ -54,7 +55,7 @@
                             </div>
                         </div>
                         <div class="image">
-                            <img v-bind:src="variant.imageMini" alt="variant.imageMini">
+                            <img class="imgLoaded" v-bind:id="variant.id" v-bind:src="variant.imageMini" alt="variant.imageMini">
                         </div>
                     </div>
                   </a>
@@ -179,11 +180,42 @@ const app = Vue.createApp({
         fetch("{{ path('galeriajson') }}").then(response => response.json())
             .then(
               (data) => {
-                  this.variants = data;
-                  this.isLoading = true;
+                  var values = [];
+
+                  this.variants = data
+                  this.isLoading = true
+
               }
-            );
+            ).then(
+                   () => {
+                    $(".imgLoaded").each(function() {  
+                        imgsrc = this.src;
+                        imgid = this.id
+                        hrefImg = $('#'+imgid).parent().parent().parent()[0].href;
+                        wtMark(imgid,imgsrc)
+                        //wtMarkHref(imgid,hrefImg)
+
+                        function wtMark(id,imgsrc){
+                          watermark([imgsrc])
+                          .image(watermark.text.center('GMUNOZR', '42px serif', '#fff', 0.5))
+                          .then(function (img) {
+                            $('#'+id).prop('src',img.src)
+                          })
+                        }
+
+                        function wtMarkHref(id,imgsrc){
+                          watermark([imgsrc])
+                          .image(watermark.text.center('GMUNOZR', '420px serif', '#fff', 0.5))
+                          .then(function (img) {
+                            $('#'+id).parent().parent().parent()[0].href = img.src
+                          })
+                        }
+
+                      }) 
+                    }            
+            )
     },
+    
     delimiters: ["${", "}$"]
 })
 
@@ -239,8 +271,15 @@ $(document).ready(function(){
       }});
 
   }
+
 });
 
 </script>
+  <script>
+  
 
+
+  </script>
+
+  <script>hljs.initHighlightingOnLoad();</script>
 {% endblock %}
