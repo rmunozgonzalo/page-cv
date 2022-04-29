@@ -41,7 +41,7 @@
         </video>
     </div>
 
-    <div id="portfolio">
+    <div id="portfolio" style="display:none;">
       <div class="full-screen-portfolio" v-if="isLoading">
           <div class="container-fluid portafolio-back" style="background: #333;">
             <div v-for="variant in variants" :key="variant.id" class="col-md-4 col-sm-6">
@@ -272,6 +272,7 @@ $(document).ready(function(){
 
   }
 
+  $("#portfolio").show()
 });
 
 </script>
