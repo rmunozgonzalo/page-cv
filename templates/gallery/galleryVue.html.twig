@@ -40,29 +40,29 @@
         </video>
     </div>
 
-
-    <div class="full-screen-portfolio" id="portfolio">
-        <div class="container-fluid portafolio-back" style="background: #333;">
-          <div v-for="variant in variants" :key="variant.id" class="col-md-4 col-sm-6">
-              <div class="portfolio-item">
-                  <a v-bind:href="variant.image" alt="variant.image" data-lightbox="image-1">
-                    <div class="thumb">
-                      <div class="hover-effect">
-                          <div class="hover-content">
-                              <h1>${variant.titulo}$<em></em></h1>
-                              <p>${variant.descripcion}$</p>
-                          </div>
-                      </div>
-                      <div class="image">
-                          <img v-bind:src="variant.imageMini" alt="variant.imageMini">
-                      </div>
-                  </div>
-                </a>
-              </div>
+    <div id="portfolio">
+      <div class="full-screen-portfolio" v-if="isLoading" >
+          <div class="container-fluid portafolio-back" style="background: #333;">
+            <div v-for="variant in variants" :key="variant.id" class="col-md-4 col-sm-6">
+                <div class="portfolio-item">
+                    <a v-bind:href="variant.image" alt="variant.image" data-lightbox="image-1">
+                      <div class="thumb">
+                        <div class="hover-effect">
+                            <div class="hover-content">
+                                <h1>${variant.titulo}$<em></em></h1>
+                                <p>${variant.descripcion}$</p>
+                            </div>
+                        </div>
+                        <div class="image">
+                            <img v-bind:src="variant.imageMini" alt="variant.imageMini">
+                        </div>
+                    </div>
+                  </a>
+                </div>
+            </div>
           </div>
-        </div>
+      </div>
     </div>
-
 
     <footer>
         <div class="container-fluid">
@@ -171,12 +171,18 @@
 const app = Vue.createApp({
     data() {
         return {
-            variants:{}
+            variants:{},
+            isLoading: false,
         }
     },
     created(){
         fetch("{{ path('galeriajson') }}").then(response => response.json())
-            .then((data) => this.variants = data);
+            .then(
+              (data) => {
+                  this.variants = data;
+                  this.isLoading = true;
+              }
+            );
     },
     delimiters: ["${", "}$"]
 })
