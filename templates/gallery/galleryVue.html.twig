@@ -67,7 +67,7 @@
     <div id="portfolio" style="display:none;">
       <div class="full-screen-portfolio" v-if="isLoading">
           <div class="container-fluid portafolio-back" style="background: #333;">
-            <div v-for="variant in variants" :key="variant.id" class="col-md-4 col-sm-6">
+            <div v-for="variant in variants" :key="variant.id" class="col-md-12 col-sm-12 col-6">
                 <div class="portfolio-item">
                     <a class="boxlg" alt="variant.image" v-bind:href="variant.image" data-lightbox="image-1">
                       <div class="thumb">
