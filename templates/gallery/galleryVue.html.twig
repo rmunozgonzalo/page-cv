@@ -22,7 +22,7 @@
         <span></span>
       </div>
     </nav>
-
+    <!-- 
     <div id="video-container">
         <div class="video-overlay"></div>
         <div class="video-content">
@@ -40,13 +40,31 @@
         	<source src="{{ asset('video/bebop2.mp4') }}" type="video/mp4" />
         </video>
     </div>
+    -->
+    <div id="video-container" style="height:0% !important;position: absolute !important;">        
+      <div class="col-12">
+        <div class="portfolio-item">
+          <a class="boxlg" alt="variant.image">
+            <div class="thumb">
+              <div class="hover-effect">
+                <div class="hover-content">
+                </div>
+              </div>
+              <div class="image">
+                <img class="" id="6" src="data" alt="variant.imageMini">
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
 
     <div id="portfolio" style="display:none;">
       <div class="full-screen-portfolio" v-if="isLoading">
           <div class="container-fluid portafolio-back" style="background: #333;">
             <div v-for="variant in variants" :key="variant.id" class="col-md-4 col-sm-6">
                 <div class="portfolio-item">
-                    <a class="boxlg" alt="variant.image" ><!-- v-bind:href="variant.image" data-lightbox="image-1"-->
+                    <a class="boxlg" alt="variant.image" v-bind:href="variant.image" data-lightbox="image-1">
                       <div class="thumb">
                         <div class="hover-effect">
                             <div class="hover-content">
