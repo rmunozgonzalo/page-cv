@@ -1382,3 +1382,15 @@ footer a:hover {
   text-align:center;
   color:#fff;
 }
+#progstat2{
+  font-size:0.7em;
+  letter-spacing: 3px;
+  position:absolute;
+  top:50%;
+  margin-top:-40px;
+  width:100%;
+  text-align:center;
+  color:#fff;
+}
+
+

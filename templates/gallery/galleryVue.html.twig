@@ -261,7 +261,6 @@ const app = Vue.createApp({
         tot = img.length;
 
     function imgLoaded(){
-      console.log("c: "+c)
       c += 1;
       var perc = ((100/tot*c) << 0) +"%";
       prog.style.width = perc;
