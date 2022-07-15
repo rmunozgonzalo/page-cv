@@ -25,9 +25,7 @@ class IndexController extends AbstractController
 
       return new Response($contents);
     }
-    /**
-     * @Route("/galeria", name="galeria")
-     */
+
    public function gallery(): Response
    {
      $refreshTk = $this->getParameter('app.refreshToken');
@@ -83,10 +81,6 @@ class IndexController extends AbstractController
     return new Response($galleryJson);
   }
 
-   /**
-    * @Route("/admintest", name="admintest")
-    * @IsGranted("ROLE_ADMIN")
-    */
   public function adminAction(): Response
   {
     $contents = $this->renderView('coming.html.twig', [
