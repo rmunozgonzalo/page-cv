@@ -8,7 +8,6 @@
 <link href="{{ asset('css/light-box.css') }}" rel="stylesheet"/>
 <link href="{{ asset('css/temo-style.css') }}" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css?family=Kanit:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-<script src="https://brianium.github.io/watermarkjs/scripts/watermark.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
 {% endblock %}
 
@@ -26,66 +25,30 @@
         <span></span>
       </div>
     </nav>
-    <!-- 
-    <div id="video-container">
-        <div class="video-overlay"></div>
-        <div class="video-content">
-            <div class="inner">
-              <h1>Bienvenido <em></em></h1>
-              <p></p>
-              <p></p>
-                <div class="scroll-icon">
-                    <a class="scrollTo" data-scrollTo="portfolio" href="#">
-                      <img src="{{ asset('img/scroll-icon.png') }}" alt=""></a>
-                </div>
-            </div>
-        </div>
-        <video autoplay="" loop="" muted>
-        	<source src="{{ asset('video/bebop2.mp4') }}" type="video/mp4" />
-        </video>
-    </div>
-    -->
-    
-    <!--
-    <div id="video-container" style="height:0% !important;position: absolute !important;">        
-      <div class="col-12">
-        <div class="portfolio-item">
-          <a class="boxlg" alt="variant.image">
-            <div class="thumb">
-              <div class="hover-effect">
-                <div class="hover-content">
-                </div>
-              </div>
-              <div class="image">
-                <img class="" id="6" src="data" alt="variant.imageMini">
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-    -->
-
-    <div id="portfolio" style="display:none;">
-      <div class="full-screen-portfolio" v-if="isLoading">
+    <div id="portfolio" style="display:block;">
+      <div class="full-screen-portfolio">
           <div class="container-fluid portafolio-back" style="background: #333;">
-            <div v-for="variant in variants" :key="variant.id" class="col-md-4 col-sm-12">
+                    {% for image in gallery %}
+
+            <div class="col-md-4 col-sm-12">
                 <div class="portfolio-item">
-                    <a class="boxlg" alt="variant.image" v-bind:href="variant.image" data-lightbox="image-1">
+                    <a class="boxlg" data-lightbox="image-1">
                       <div class="thumb">
                         <div class="hover-effect">
                             <div class="hover-content">
-                                <h1>${variant.titulo}$<em></em></h1>
-                                <p>${variant.descripcion}$</p>
+                                <h1>{{image.titulo}}<em></em></h1>
+                                <p>{{image.descripcion}}</p>
                             </div>
                         </div>
                         <div class="image">
-                            <img class="imgLoaded" v-bind:id="variant.id" v-bind:src="variant.imageMini" alt="variant.imageMini">
+                            <img src="{{base_path}}{{image.getImageMini}}" alt="{{image.getImageMini}}">
                         </div>
                     </div>
                   </a>
                 </div>
             </div>
+                       {% endfor %}
+
           </div>
       </div>
     </div>
@@ -180,8 +143,6 @@
 
 {% block javascripts %}
 {{ parent() }}
-<script src="{{ asset('js/vue.global.prod.js') }}"></script>
-
 <script src="{{ asset('js/modernizr-2.8.3-respond-1.4.2.min.js') }}"></script>
 
 <script>window.jQuery || document.write('<script src="{{ asset('js/vendor/jquery-1.11.2.min.js') }}"><\/script>')</script>
@@ -197,57 +158,7 @@
 
 <!-- Mount App -->
 <script>
-const app = Vue.createApp({
-    data() {
-        return {
-            variants:{},
-            isLoading: false,
-        }
-    },
-    created(){
-        fetch("{{ path('galeriajson') }}").then(response => response.json())
-            .then(
-              (data) => {
-                  var values = [];
 
-                  this.variants = data
-                  this.isLoading = true
-
-              }
-            ).then(
-                   () => {
-                    $(".imgLoaded").each(function() {  
-                        imgsrc = this.src;
-                        imgid = this.id
-                        hrefImg = $('#'+imgid).parent().parent().parent()[0].href;
-                        //wtMark(imgid,imgsrc)
-                        //wtMarkHref(imgid,hrefImg)
-
-                        function wtMark(id,imgsrc){
-                          watermark([imgsrc])
-                          .image(watermark.text.center('GMUNOZR', '42px serif', '#fff', 0.5))
-                          .then(function (img) {
-                            $('#'+id).prop('src',img.src)
-                          })
-                        }
-
-                        function wtMarkHref(id,imgsrc){
-                          watermark([imgsrc])
-                          .image(watermark.text.center('GMUNOZR', '420px serif', '#fff', 0.5))
-                          .then(function (img) {
-                            $('#'+id).parent().parent().parent()[0].href = img.src
-                          })
-                        }
-
-                      }) 
-                    }            
-            )
-    },
-    
-    delimiters: ["${", "}$"]
-})
-
-  const mountedApp = app.mount('#portfolio')
 </script>
 
 

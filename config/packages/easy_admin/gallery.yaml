@@ -15,7 +15,7 @@ easy_admin:
           - {property: titulo, label: "Titulo"}
           - {property: descripcion, label: "Descripción"}
           - {property: estado, label: "Estado"}
-          - {property: image, label: "Imagen Galeria", type: 'image', base_path: '%app.base.images%'}
+          #- {property: image, label: "Imagen Galeria", type: 'image', base_path: '%app.base.images%'}
           - {property: image_mini, label: "Imagen Galeria Mini", type: 'image', base_path: '%app.base.images%'}
 
       show:

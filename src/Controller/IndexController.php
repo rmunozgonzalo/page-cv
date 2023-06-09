@@ -26,6 +26,9 @@ class IndexController extends AbstractController
       return new Response($contents);
     }
 
+    /**
+    * @Route("/galeria", name="galeria")
+    */
    public function gallery(): Response
    {
      $refreshTk = $this->getParameter('app.refreshToken');
@@ -56,6 +59,25 @@ class IndexController extends AbstractController
 
     return new Response($contents);
   }
+
+     /**
+    * @Route("/galeriavue2", name="galeriavue2")
+    */
+    public function galleryVue2(): Response
+    {
+      $refreshTk = $this->getParameter('app.refreshToken');
+      $gallery = $this->getDoctrine()
+      ->getRepository(Gallery::class)
+      ->findBy(['estado'=>1]);
+
+      $contents = $this->renderView('gallery/galleryv2.html.twig',
+      [
+        'refresh'=>$refreshTk,
+        'gallery'=>$gallery
+      ]);
+  
+      return new Response($contents);
+    }
    /**
     * @Route("/galeria/json", name="galeriajson")
     */
