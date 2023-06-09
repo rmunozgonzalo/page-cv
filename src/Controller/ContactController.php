@@ -38,9 +38,9 @@ class ContactController extends AbstractController
       $result = $mailer->send($emailContact);
       $result2 = $mailer->send($emailOwner);
 
-      $contents = $this->renderView('gallery/gallery.html.twig', ['refresh'=>''
-      ]);
+     $data = ['status'=>true];
 
-      return new Response($contents);
+     return new JsonResponse($data);
+
     }
 }
