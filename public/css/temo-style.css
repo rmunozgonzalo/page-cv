@@ -1393,4 +1393,7 @@ footer a:hover {
   color:#fff;
 }
 
+.invert{
+  filter: invert(48%) sepia(13%) saturate(3207%) hue-rotate(130deg) brightness(95%) contrast(80%);
+}
 
