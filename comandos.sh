@@ -1,3 +1,4 @@
+#COMANDOS
 cd /var/www/html/page-cv
 sudo chown admin:admin var/ -R
 sudo chown admin:admin public/upload/images/ -R
