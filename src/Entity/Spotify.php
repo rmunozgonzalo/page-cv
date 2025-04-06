@@ -17,7 +17,7 @@ class Spotify
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=2092)
      */
     private $token;
 
